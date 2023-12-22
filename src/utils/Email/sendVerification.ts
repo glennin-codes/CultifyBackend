@@ -10,7 +10,7 @@ export const VerifyEmail = async (email:string,name:string, code:string) => {
   const msg = {
     to: email,
     from: "ayiendaglen@gmail.com",
-    subject: "Welcome to carhub",
+    subject: "Welcome to cultify",
     html: sendCredentials(name, email, code),
   };
  
