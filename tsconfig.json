@@ -21,6 +21,6 @@
 
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/db"],
   "exclude": ["node_modules", "dist", "build", "coverage", "scripts", "test"]
 }
