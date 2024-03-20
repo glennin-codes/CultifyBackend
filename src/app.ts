@@ -11,12 +11,12 @@ import express, {
 
   import logger from 'morgan';
 import router from "./routes/index.js";
-  
+  import cors,{ CorsOptions } from "cors";
   config();
   
   const app: Application = express();
   const port: number = Number(process.env.Port) || 8080;
-  
+  app.use(cors())
   app.use(logger("dev"));
   // app.use(logger(':method :url :status :res[content-length] - :response-time ms :user-agent'));
   //middlewares

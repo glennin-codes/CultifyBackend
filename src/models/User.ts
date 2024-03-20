@@ -1,5 +1,6 @@
 
 import mongoose, { Document, Schema } from "mongoose";
+import { IPrediction,predictionSchema } from "./PredictionSchema.js";
 
 interface IImage {
     url: string;
@@ -22,6 +23,7 @@ interface Iuser extends Document {
     verificationCode:string;
     signupMethod:string;
     profilePhoto:IImage;
+    predictions:IPrediction[];
    
 }
 
@@ -31,7 +33,7 @@ const userSchema = new Schema <Iuser>({
     firstName:{type:String,required:true},
     lastName:{type:String,},
     phoneNumber:{type:String,},
-    location:{type:String,},
+    location:{type:String,default:"Nairobi"},
     profilePhoto:{
         url:{type:String},
         title:{type:String},
@@ -44,6 +46,7 @@ const userSchema = new Schema <Iuser>({
         type:String,
         enum:["manual","google"]   
     },
+    predictions: [predictionSchema]
   
     
 });

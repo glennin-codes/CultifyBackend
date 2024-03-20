@@ -48,7 +48,7 @@ export const loginUser = async (req:Request, res:Response) => {
 const name:string=`${user.firstName} ${user.lastName}`;
       const token = generateAuthToken(user._id, user.email,name);
 
-      res.status(200).json({ token,id:user._id});
+      res.status(200).json({ token,id:user._id,name});
     }
   } catch (error) {
     console.error(error);
