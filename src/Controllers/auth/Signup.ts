@@ -58,7 +58,7 @@ const name=`${user.firstName } ${user.lastName}`;
         .json({ token,id:user._id });
     } else {
       // Manual Sign-up
-      const { firstName,lastName, email, password, phone,location} =
+      const { firstName,lastName, email, password, phoneNumber,location} =
         req.body;
 
       const existingUser = await User.findOne({ email: email });
@@ -76,7 +76,7 @@ const name=`${user.firstName } ${user.lastName}`;
         lastName:lastName,
         email: email,
         password: hashedPassword,
-        phone: phone,
+        phoneNumber: phoneNumber,
         location: location,
         signupMethod: "manual",
        verificationCode:verificationCode,
