@@ -1,5 +1,5 @@
 
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, SchemaDefinitionProperty } from "mongoose";
 import { IPrediction,predictionSchema } from "./PredictionSchema.js";
 
 interface IImage {
@@ -7,6 +7,10 @@ interface IImage {
     title: string;
 
 }  
+export enum Role {
+    admin = "admin",
+    user = "user"
+}
 
 interface Iuser extends Document {
     email: string;
@@ -24,6 +28,7 @@ interface Iuser extends Document {
     signupMethod:string;
     profilePhoto:IImage;
     predictions:IPrediction[];
+    role: Role; 
    
 }
 
@@ -46,7 +51,12 @@ const userSchema = new Schema <Iuser>({
         type:String,
         enum:["manual","google"]   
     },
-    predictions: [predictionSchema]
+    predictions: [predictionSchema],
+    role:{
+        type:String,
+        enum: Object.values(Role) as string[],
+        default:"user"
+    } as SchemaDefinitionProperty<Role, Iuser> | undefined
   
     
 });

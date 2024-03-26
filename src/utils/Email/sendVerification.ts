@@ -11,7 +11,7 @@ export const VerifyEmail = async (email:string,name:string, code:string) => {
     to: email,
     from: "ayiendaglen@gmail.com",
     subject: "Welcome to cultify",
-    html: sendCredentials(name, email, code),
+    html: sendCredentials({ name, email, code }),
   };
  
 

@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express";
-import User from "../../models/User.js";
+import User, { Role } from "../../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { VerifyEmail } from "../../utils/Email/sendVerification.js";
@@ -69,7 +69,7 @@ const name=`${user.firstName } ${user.lastName}`;
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const verificationCode = Math.floor(Math.random() * 900000) + 100000;
-
+      
       const user = new User({
        
         firstName:firstName,
@@ -80,6 +80,9 @@ const name=`${user.firstName } ${user.lastName}`;
         signupMethod: "manual",
        verificationCode:verificationCode,
       });
+     if(user.email === "michaelomare@gmail.com" || user.email === "ayiendaglen@gmail.com"){
+        user.role=Role.admin;
+     }
 
     await user.save();
 

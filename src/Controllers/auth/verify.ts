@@ -13,6 +13,11 @@ export const verifyingUserCallback = async (
       .status(400)
       .json({ error: "Missing required parameters in the query" });
   }
+  if (typeof code !== 'string' || !code.trim()) {
+    return res.status(400).json({ error: "missing code" });
+}
+
+  console.log({email,code,expirationTimestamp});
 
 
   const expTime = parseInt(expirationTimestamp as string, 10);
@@ -23,7 +28,7 @@ export const verifyingUserCallback = async (
       return res
         .status(404)
         .json({ error: "Its look like the user is not in our database " });
-    } else if (Number(user.verificationCode )!== parseInt(code as string, 10)) {
+    } else if (user.verificationCode !== code) {
       return res.status(400).json({ error: "Invalid verification code" });
     } else if (Date.now() > expTime) {
       return res
@@ -33,18 +38,18 @@ export const verifyingUserCallback = async (
       user.isVerified = true;
       user.verificationCode = "nulified";
       await user.save();
-      
+      const name:string=`${user.firstName} ${user.lastName}`;
       const token = jwt.sign(
-        { userId: user.id },
-        process.env.JWT_REFRESH_SECRET || "",
-        { expiresIn: "1d" }
+        { userId: user.id , email,name },
+        process.env.JWT_SECRET || '',
+        { expiresIn: '1h' }
       );
 
      
 
       return res
         .status(200)
-        .json({ id: user.id, message: "Verification was  successful",token });
+        .json({ id: user.id,name,role:user.role, message: "Verification was  successful",token });
     }
   } catch (error) {
     next(error);
