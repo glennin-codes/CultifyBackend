@@ -14,7 +14,7 @@ export const sendCredentials = (name:string, email:string, code:string) => {
     const expirationTime =12 * 60 * 60 * 1000; // 12 hours in milliseconds
     const expirationTimestamp = Date.now() + expirationTime;
 
-const verificationLink = `https://cultifydetector.vercel.app/verifying?email=${email}&code=${code}&e=${expirationTimestamp}`;
+const verificationLink = `http://localhost:5173/verifying?email=${email}&code=${code}&e=${expirationTimestamp}`;
 
   
   // Generate the email content
