@@ -9,6 +9,7 @@ import deleteUser from "../Controllers/users/deleteUsers.js";
 import { Prediction } from "../Controllers/prediction/index.js";
 import { deleteMulti } from "../Controllers/deleteMulti/index.js";
 import { verifyingUserCallback } from "../Controllers/auth/verify.js";
+import { Annalys } from "../Controllers/Annalysis/index.js";
 const router=express.Router();
 router.get("/api", (req:Request, res:Response) => {
     res.send("api working succesful!");
@@ -19,6 +20,7 @@ router.get("/api", (req:Request, res:Response) => {
   router.post("/api/auth/verify",verifyingUserCallback);
   router.route('/api/users/').get(getAllUsers);
   router.route('/api/predict/:id').patch(Prediction);
+  router.route('/api/annalysis').get(Annalys);
   router.route('/api/delete/users').delete(deleteMulti)
 
   export default  router
