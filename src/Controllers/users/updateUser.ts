@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import User from "../../models/User.js";
+import User, { Role } from "../../models/User.js";
 import bcrypt from 'bcrypt';
 
 // Update user by ID with PATCH method
 const UpdateUser = async (req:Request, res:Response) => {
   const { id } = req.params;
-  const { firstName, lastName ,email, phoneNumber, location,isVerified,verificationCode ,password } = req.body;
+  const { firstName, lastName ,email, phoneNumber, location,isVerified,verificationCode ,password,makeAdmin } = req.body;
 
   try {
     const user = await User.findById(id);
@@ -25,7 +25,7 @@ if(password){
     if (isVerified) user.isVerified =isVerified;
     if (verificationCode) user.verificationCode = verificationCode;
    
-
+    if (makeAdmin) user.role = Role.admin;
     const updatedUser = await user.save();
   
     res.status(200).json({updatedUser,message:"User updated successfully"});

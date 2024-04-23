@@ -10,6 +10,7 @@ import { Prediction } from "../Controllers/prediction/index.js";
 import { deleteMulti } from "../Controllers/deleteMulti/index.js";
 import { verifyingUserCallback } from "../Controllers/auth/verify.js";
 import { Annalys } from "../Controllers/Annalysis/index.js";
+
 const router=express.Router();
 router.get("/api", (req:Request, res:Response) => {
     res.send("api working succesful!");
