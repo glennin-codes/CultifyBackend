@@ -28,10 +28,10 @@ if(password){
 
     const updatedUser = await user.save();
   
-    res.status(200).json(updatedUser);
+    res.status(200).json({updatedUser,message:"User updated successfully"});
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ error: 'Server error' });
   }
 };
 

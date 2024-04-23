@@ -19,6 +19,7 @@ router.get("/api", (req:Request, res:Response) => {
   router.post("/api/auth/login", loginUser);
   router.post("/api/auth/verify",verifyingUserCallback);
   router.route('/api/users/').get(getAllUsers);
+  router.route('/api/users/:id').get(getSingleUser).patch(UpdateUser).delete(deleteUser);
   router.route('/api/predict/:id').patch(Prediction);
   router.route('/api/annalysis').get(Annalys);
   router.route('/api/delete/users').delete(deleteMulti)
