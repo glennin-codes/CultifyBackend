@@ -23,7 +23,7 @@ import router from "./routes/index.js";
   app.use(express.json());
   
   app.get("/", (req: Request, res: Response, next: NextFunction) => {
-    res.send("car hub api");
+    res.send("api working succesfull");
   });
   app.use(router);
   app.use("*", (req: Request, res: Response, next: NextFunction) => {
@@ -48,7 +48,9 @@ import router from "./routes/index.js";
       .json({ error: err.message || "something went wrong" });
   };
   app.use(handleErrors);
-  
+
+  export default app;
+
   const start = async (url: string, port: number) => {
     try {
       await connectToDatabase(url);
